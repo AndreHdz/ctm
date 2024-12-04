@@ -32,6 +32,7 @@ const RegisterForm = () => {
         defaultValues: {
             user_id : "",
             curp: "",
+            phone: "",
             password: ""
         }
     })
@@ -92,6 +93,24 @@ const RegisterForm = () => {
                                         {...field}
                                         placeholder="ABCD990201ABCDEF06"
                                         type="text"
+                                        disabled={isPending}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField 
+                        control={form.control}
+                        name="phone"
+                        render={({field}) => (
+                            <FormItem>
+                                <FormLabel>Celular</FormLabel>
+                                <FormControl>
+                                    <Input 
+                                        {...field}
+                                        placeholder="3221234567"
+                                        type="phone"
                                         disabled={isPending}
                                     />
                                 </FormControl>

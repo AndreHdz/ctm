@@ -18,29 +18,32 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
-  name String?
-  status String?
+  name String
+  status String
   image String?
   password String?
   born_place String?
-  street String
-  colony String
-  city String
-  phone String
-  age String
-  gender String
-  birthdate DateTime?
+  street String?
+  colony String?
+  city String?
+  phone String?
+  age Float?
+  gender String?
   register_date DateTime?
-  updated_at DateTime @updatedAt
-  key String
-  working_company String
-  emp_status String
-  daily_salary String
-  voter_code String
-  curp String
-  rfc String
-  cci_type String
-  syndicate String
+  birthdate DateTime?
+  updated_at DateTime? @updatedAt
+  key String?
+  working_company String?
+  emp_status String?
+  daily_salary String?
+  voter_code String?
+  curp String?
+  rfc String?
+  cci_type Int?
+  syndicate Int?
+  role Role @default(USER)
+  is_registered Boolean?
+  is_verified Boolean?
   accounts Account[]
 }
 
@@ -66,11 +69,16 @@ model Account {
 }
 
 enum status{
-  ACTIVE
-  INACTIVE
+  ACTIVO
+  INACTIVO
+  IRREGULAR
   PENSIONADO
 }
 
+enum gender{
+  MASCULINO
+  FEMENINO
+}
 
 enum Role{
   USER

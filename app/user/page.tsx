@@ -1,8 +1,23 @@
 import Image from "next/image";
 import React from "react";
 import QRCode from "react-qr-code";
+import { getCookie } from "cookies-next";
+
+
+
 
 const Page = () => {
+
+    const getUserIdFromCookie = () => {
+        const userId = getCookie('user');
+        return userId || null;
+    };
+    
+    const userId = getUserIdFromCookie();
+
+    console.log(userId);
+
+    
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="max-w-[400px] px-4 mt-3">
@@ -14,7 +29,7 @@ const Page = () => {
                     </p>
                 </div>
                 <div className="pb-8">
-                    <Image src="/user.png" className="mx-auto py-8" alt="User picture" width={100} height={120}/>
+                    <Image src="/avatar_placeholder.jpg" className="mx-auto py-8 rounded-md" alt="User picture" width={120} height={160}/>
                     <p className="text-xl text-center font-bold uppercase pb-2">Chel Muñoz Erick Alejandro</p>
                     <p className="text-center font-bold uppercase ">HOTEL SECRETS VALLARTA BAY & DREAMS V</p>
                 </div>
