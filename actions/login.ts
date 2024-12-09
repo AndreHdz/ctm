@@ -3,8 +3,9 @@
 import * as z from "zod";
 import { db } from "@/lib/db";
 import { LoginSchema } from "@/schemas";
-import bcrypt from "bcrypt";
-import { redirect } from "next/navigation";
+import { signIn } from "@/auth";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { AuthError } from "next-auth";
 
 export const  login = async (values: z.infer<typeof LoginSchema>) => {
 
@@ -16,29 +17,22 @@ export const  login = async (values: z.infer<typeof LoginSchema>) => {
 
     const {user_id, password} = validateFields.data;
 
-    const user = await db.user.findUnique({
-        where : {
-            id : parseInt(user_id)
-        }
-    })
 
-    if(!user){
-        return {error : "Credencial o contraseña incorrecta"}
-    }
-
-    if(!user.is_registered){
-        return {error : "Aún no te has registrado"}
-    }
-
-    const match = await bcrypt.compare(password, user.password || "");
-
-    if(!match){
-        return {error : "Credencial o contraseña incorrecta"}
-    }
-
-
-    redirect("/user");
-
-
-    return {success : "Login correcto"}
+    try{
+        await signIn("credentials", {
+            user_id,
+            password,
+            redirectTo : DEFAULT_LOGIN_REDIRECT
+        })
+    } catch(error){ 
+       if(error instanceof AuthError){
+            switch(error.type){
+                case "CredentialsSignin":
+                    return {error : "Número de Credencial o contraseña incorrecta"}
+                default:
+                    return {error : "Error desconocido"}
+            }
+       } 
+       throw error;
+     }
 }

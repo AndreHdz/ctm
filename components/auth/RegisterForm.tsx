@@ -150,7 +150,7 @@ const RegisterForm = () => {
                     className="w-full"
                     disabled={isPending}
                 >
-                    Iniciar Sesión
+                    Registrar
                 </Button>
             </form>
         </Form>
