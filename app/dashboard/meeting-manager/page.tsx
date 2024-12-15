@@ -3,8 +3,7 @@
 import React, { useState } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { QrReader } from 'react-qr-reader'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Pencil, Trash2, Download, CameraIcon } from 'lucide-react'
@@ -22,8 +21,8 @@ export default function ReunionManager() {
     { id: 2, nombre: "Revisión de proyecto", fecha: "2023-07-02", horario: "14:30" },
     { id: 3, nombre: "Planificación mensual", fecha: "2023-07-03", horario: "09:00" },
   ])
-  const [isQRReaderOpen, setIsQRReaderOpen] = useState(false)
-  const [scannedData, setScannedData] = useState<string | null>(null)
+  //const [isQRReaderOpen, setIsQRReaderOpen] = useState(false)
+  //const [scannedData, setScannedData] = useState<string | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [currentReunion, setCurrentReunion] = useState<Reunion | null>(null)
   const [isEditing, setIsEditing] = useState(false)
@@ -33,7 +32,7 @@ export default function ReunionManager() {
     // Aquí iría la lógica real para exportar el reporte
   }
 
-  const handleScan = (data: string | null) => {
+/*   const handleScan = (data: string | null) => {
     if (data) {
       setScannedData(data)
       setIsQRReaderOpen(false)
@@ -45,7 +44,7 @@ export default function ReunionManager() {
   const handleError = (err: Error) => {
     console.error(err)
   }
-
+ */
   const handleOpenDialog = (reunion?: Reunion) => {
     if (reunion) {
       setCurrentReunion(reunion)

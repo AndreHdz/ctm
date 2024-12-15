@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { NextAuthConfig } from "next-auth"
 import bcrypt from "bcryptjs"
 import Credentials from "next-auth/providers/credentials"
@@ -6,8 +7,11 @@ import {db} from "./lib/db"
 
 export default { 
     providers: [
+        
         Credentials({
-            async authorize(credentials){
+            // @ts-expect-error
+            async authorize(credentials) {
+
                 const validateFields = LoginSchema.safeParse(credentials);
 
                 if(validateFields.success){

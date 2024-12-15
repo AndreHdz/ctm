@@ -1,8 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import QRCode from "react-qr-code";
 import {auth ,signOut} from "@/auth";
-import { useRouter } from "next/navigation";
 
 
 
@@ -32,7 +30,7 @@ const Page = async () => {
                     <p className="text-center font-bold uppercase">Tel: {session?.user?.phone}</p>
                 </div>
                 <div className="py-8">
-                    <QRCode value={session?.user?.id || ""} className="w-[120px] h-[120px] mx-auto mb-2" />
+                    <p className="barcode text-5xl text-center">{`*${session?.user?.id}*`}</p>
                     <p className="text-sm text-center font-bold uppercase">{session?.user?.id}</p>
                 </div>
                 <div className="flex justify-center">
